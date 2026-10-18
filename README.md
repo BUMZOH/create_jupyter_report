@@ -1,0 +1,2 @@
+# create_jupyter_report
+Jupyter Notebookを利用して、SQLiteデータベースから設備別の生産実績を集計し、 表とグラフを含むHTMLレポートを作成するサンプルプロジェクトです。
