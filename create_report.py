@@ -14,14 +14,36 @@ OUTPUT_NOTEBOOK_PATH = "output_report.ipynb"
 
 DESKTOP_PATH = Path.home() / "Desktop"
 
+
+# ================================================
+#   Functions
+# ================================================
+def normalize_date(value):
+    parts = value.split("-")
+
+    if len(parts) == 2:
+        year = datetime.now().year
+        month, day = map(int, parts)
+
+    elif len(parts) == 3:
+        year, month, day = map(int, parts)
+
+        if year < 100:
+            year += 2000
+
+    else:
+        raise ValueError("日付は YYYY-M-D / YY-M-D / M-D で入力してください。")
+
+    date = datetime(year, month, day)
+
+    return date.strftime("%Y-%m-%d")
+
+
 # ================================================
 #   Input date
 # ================================================
-start_date = input("開始日 [YYYY-MM-DD]: ")
-end_date = input("終了日 [YYYY-MM-DD]: ")
-
-datetime.strptime(start_date, "%Y-%m-%d")
-datetime.strptime(end_date, "%Y-%m-%d")
+start_date = normalize_date(input("開始日: "))
+end_date = normalize_date(input("終了日: "))
 
 start_date_text = start_date.replace("-", "")
 end_date_text = end_date.replace("-", "")
