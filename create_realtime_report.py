@@ -111,6 +111,7 @@ def add_auto_refresh(html_path):
 #   Main
 # ================================================
 def main():
+    print(sys.executable)
     start_date = normalize_date(input("開始日: "))
     end_date = normalize_date(input("終了日: "))
 
