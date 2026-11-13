@@ -111,13 +111,13 @@ def add_auto_refresh(html_path):
 #   Main
 # ================================================
 def main():
-    print(sys.executable)
+    print(f"実行環境 = {sys.executable}")
     start_date = normalize_date(input("開始日: "))
     end_date = normalize_date(input("終了日: "))
 
     print()
     print("リアルタイムHTMLレポートを開始します。")
-    print(f"更新間隔: {UPDATE_INTERVAL_SECONDS // 60}分")
+    print(f"更新間隔: {UPDATE_INTERVAL_SECONDS}秒")
     print(f"ブラウザ再読み込み間隔: {BROWSER_REFRESH_SECONDS}秒")
     print("終了する場合は Ctrl+C を押してください。")
 
@@ -138,11 +138,15 @@ def main():
                 print("次回の更新時に再試行します。")
 
             print()
-            print(
-                f"次回更新まで "
-                f"{UPDATE_INTERVAL_SECONDS // 60}分待機します..."
-            )
-            time.sleep(UPDATE_INTERVAL_SECONDS)
+            for elapsed in range(1, UPDATE_INTERVAL_SECONDS + 1):
+                print(
+                    f"\r次回更新まで {elapsed} / {UPDATE_INTERVAL_SECONDS} 秒",
+                    end="",
+                    flush=True,
+                )
+                time.sleep(1)
+
+            print()
 
     except KeyboardInterrupt:
         print()
