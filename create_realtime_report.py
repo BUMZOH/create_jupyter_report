@@ -1,4 +1,4 @@
-import subprocess
+import subprocess  # 外部コマンド実行（nbconvert）
 import sys
 import time
 import webbrowser
